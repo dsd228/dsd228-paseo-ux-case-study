@@ -1,6 +1,5 @@
 const appContainer = document.getElementById("app");
 
-// Plantillas para las pantallas
 const screens = {
   login: `
     <section class="screen login">
@@ -24,18 +23,8 @@ const screens = {
   `
 };
 
-// Carga dinámica de pantallas
 function loadScreen(name) {
   appContainer.innerHTML = screens[name];
 }
 
-// Navegación simple basada en data-screen
-document.body.addEventListener("click", (event) => {
-  const screen = event.target.dataset.screen;
-  if (screen) {
-    loadScreen(screen);
-  }
-});
-
-// Pantalla inicial
 loadScreen("login");
