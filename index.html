@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PASEO - Conecta con paseadores de perros confiables">
+  <title>PASEO - Tu app para el cuidado de mascotas</title>
+  
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+  <div id="app">
+    
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen">
+      <div class="container text-center">
+        <div class="mt-xl mb-xl">
+          <div class="logo">
+            <div class="logo-icon">🐾</div>
+          </div>
+        </div>
+        
+        <h1 class="mb-sm">BIENVENIDO</h1>
+        <p class="text-muted text-small mb-xl">Ingresa email y contraseña para continuar</p>
+        
+        <form id="login-form">
+          <div class="input-group">
+            <label class="input-label" for="login-email">Email</label>
+            <input 
+              type="email" 
+              id="login-email" 
+              class="input-field" 
+              placeholder="tu@email.com"
+              required
+            >
+          </div>
+          
+          <div class="input-group">
+            <label class="input-label" for="login-password">Contraseña</label>
+            <input 
+              type="password" 
+              id="login-password" 
+              class="input-field" 
+              placeholder="••••••••"
+              required
+            >
+          </div>
+          
+          <button type="submit" class="btn btn-primary mb-lg">INGRESAR</button>
+        </form>
+        
+        <p class="text-muted text-small mb-md">Ingresar con:</p>
+        
+        <div class="grid grid-2 mb-lg" style="gap: 8px;">
+          <button class="btn-social social-login-btn">
+            <span>🔍</span>
+            <span>Google</span>
+          </button>
+          <button class="btn-social social-login-btn">
+            <span>🍎</span>
+            <span>Apple</span>
+          </button>
+        </div>
+        
+        <div class="mt-lg">
+          <p class="text-small text-muted">
+            ¿No tienes cuenta? 
+            <a href="#" id="register-link" class="link">Regístrate</a>
+          </p>
+          <p class="text-small text-muted mt-sm">
+            <a href="#" id="inspect-link" class="link">Inspeccionar la app</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Screen -->
+    <div id="register-screen" class="screen">
+      <div class="container text-center">
+        <div class="mt-xl mb-xl">
+          <div class="logo">
+            <div class="logo-icon">🐾</div>
+          </div>
+        </div>
+        
+        <h1 class="mb-sm">REGISTRARSE</h1>
+        <p class="text-muted text-small mb-xl">Se parte de la familia PASEO</p>
+        
+        <form id="register-form">
+          <div class="input-group">
+            <label class="input-label" for="register-name">Nombre completo</label>
+            <input 
+              type="text" 
+              id="register-name" 
+              class="input-field" 
+              placeholder="Tu nombre"
+              required
+            >
+          </div>
+          
+          <div class="input-group">
+            <label class="input-label" for="register-email">Email</label>
+            <input 
+              type="email" 
+              id="register-email" 
+              class="input-field" 
+              placeholder="tu@email.com"
+              required
+            >
+          </div>
+          
+          <div class="input-group">
+            <label class="input-label" for="register-password">Contraseña</label>
+            <input 
+              type="password" 
+              id="register-password" 
+              class="input-field" 
+              placeholder="••••••••"
+              required
+            >
+          </div>
+          
+          <button type="submit" class="btn btn-primary mb-lg">Crear cuenta</button>
+        </form>
+        
+        <p class="text-muted text-small mb-md">Regístrate con:</p>
+        
+        <div class="grid grid-2 mb-lg" style="gap: 8px;">
+          <button class="btn-social social-login-btn">
+            <span>🔍</span>
+            <span>Google</span>
+          </button>
+          <button class="btn-social social-login-btn">
+            <span>🍎</span>
+            <span>Apple</span>
+          </button>
+        </div>
+        
+        <div class="mt-lg">
+          <p class="text-small text-muted">
+            ¿Ya tienes cuenta? 
+            <a href="#" id="login-link" class="link">Ingresar</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Role Selection Screen -->
+    <div id="role-screen" class="screen">
+      <div class="container text-center">
+        <h1 class="mt-xl mb-lg">¡Contanos sobre vos!</h1>
+        <p class="text-muted mb-xl">Busca sus servicios</p>
+        
+        <div class="grid" style="gap: 16px;">
+          <div class="role-card" data-role="owner">
+            <div class="role-card-icon">🐕</div>
+            <h3 class="role-card-title">Tengo mascota</h3>
+            <p class="role-card-description">Paseos para perros</p>
+          </div>
+          
+          <div class="role-card" data-role="provider">
+            <div class="role-card-icon">🦴</div>
+            <h3 class="role-card-title">Ofrezco servicios</h3>
+            <p class="role-card-description">Guardería • Peluquería • Entrenamiento</p>
+          </div>
+        </div>
+
+        <div class="mt-xl">
+          <h3 class="mb-md">Área de servicio</h3>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="check-ingreso" checked>
+              <label for="check-ingreso">Ingresar a la ubicación</label>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary mt-xl">COMENZAR</button>
+      </div>
+    </div>
+
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen">
+      <div class="container-with-nav">
+        <div class="mb-lg">
+          <h2 id="home-greeting">¡Hola, Loren!</h2>
+          <p class="text-muted text-small">¿Qué servicio necesitas hoy?</p>
+        </div>
+        
+        <button id="schedule-btn" class="btn btn-primary mb-lg">Programar cita</button>
+        
+        <div class="mb-md">
+          <p class="text-muted text-small">Último paseo: Martes, 45 min</p>
+        </div>
+
+        <h3 class="mb-md">Paseos recurrentes</h3>
+        
+        <div class="grid grid-2 mb-xl">
+          <div class="service-card home-service-card" data-service-id="1" style="background-image: url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop');">
+            <div class="service-card-content">
+              <h3 class="service-card-title">Paseos</h3>
+            </div>
+          </div>
+          
+          <div class="service-card home-service-card" data-service-id="2" style="background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=300&fit=crop');">
+            <div class="service-card-content">
+              <h3 class="service-card-title">Guardería</h3>
+            </div>
+          </div>
+          
+          <div class="service-card home-service-card" data-service-id="3" style="background-image: url('https://images.unsplash.com/photo-1560807707-8cc77767d783?w=400&h=300&fit=crop');">
+            <div class="service-card-content">
+              <h3 class="service-card-title">Baño y peluquería</h3>
+            </div>
+          </div>
+          
+          <div class="service-card home-service-card" data-service-id="4" style="background-image: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=300&fit=crop');">
+            <div class="service-card-content">
+              <h3 class="service-card-title">Entrenamiento</h3>
+            </div>
+          </div>
+          
+          <div class="service-card home-service-card" data-service-id="5" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=400&h=300&fit=crop');">
+            <div class="service-card-content">
+              <h3 class="service-card-title">Celebraciones</h3>
+            </div>
+          </div>
+          
+          <div class="service-card home-service-card" data-service-id="6" style="background-image: url('https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=400&h=300&fit=crop');">
+            <div class="service-card-content">
+              <h3 class="service-card-title">Seguro de salud</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Screen -->
+    <div id="services-screen" class="screen">
+      <div class="container-with-nav">
+        <h2 class="mb-md">Servicios disponibles</h2>
+        <p class="text-muted text-small mb-lg">Selecciona el servicio que necesitas</p>
+        
+        <div id="services-grid" class="grid grid-2">
+          <!-- Services will be rendered by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Screen -->
+    <div id="profile-screen" class="screen">
+      <div class="container-with-nav">
+        <h2 class="mb-lg">MENÚ</h2>
+        
+        <div class="grid" style="gap: 12px;">
+          <div class="card">
+            <h3 class="mb-sm">Paseos recurrentes</h3>
+            <p class="text-muted text-small">Ver tus paseos programados</p>
+          </div>
+          
+          <div class="card">
+            <h3 class="mb-sm">Paseos</h3>
+            <p class="text-muted text-small">Historial de paseos</p>
+          </div>
+          
+          <div class="card">
+            <h3 class="mb-sm">Guardería</h3>
+            <p class="text-muted text-small">Servicios de guardería</p>
+          </div>
+          
+          <div class="card">
+            <h3 class="mb-sm">Baño y peluquería</h3>
+            <p class="text-muted text-small">Servicios de estética</p>
+          </div>
+          
+          <div class="card">
+            <h3 class="mb-sm">Entrenamiento</h3>
+            <p class="text-muted text-small">Entrenamientos programados</p>
+          </div>
+          
+          <div class="card">
+            <h3 class="mb-sm">Celebraciones y fiestas</h3>
+            <p class="text-muted text-small">Eventos especiales</p>
+          </div>
+          
+          <div class="card">
+            <h3 class="mb-sm">Seguro de salud</h3>
+            <p class="text-muted text-small">Información de seguros</p>
+          </div>
+          
+          <div class="card">
+            <h3 class="mb-sm">Plan Exequial</h3>
+            <p class="text-muted text-small">Servicios funerarios</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <div class="nav-item" data-screen="home-screen">
+        <div class="nav-icon">🏠</div>
+        <span>Inicio</span>
+      </div>
+      <div class="nav-item" data-screen="services-screen">
+        <div class="nav-icon">🐕</div>
+        <span>Servicios</span>
+      </div>
+      <div class="nav-item" data-screen="home-screen">
+        <div class="nav-icon">📅</div>
+        <span>Citas</span>
+      </div>
+      <div class="nav-item" data-screen="profile-screen">
+        <div class="nav-icon">👤</div>
+        <span>Perfil</span>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/router.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
