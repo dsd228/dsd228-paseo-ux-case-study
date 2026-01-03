@@ -35,6 +35,8 @@ function showNotification(message, type = 'info') {
 const appState = {
   currentUser: null,
   userRole: null,
+  // NOTE: External image URLs are used for demo purposes only
+  // In production, use local assets or implement proper fallback handling
   services: [
     { id: 1, name: 'Paseos', icon: '🐕', image: 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop' },
     { id: 2, name: 'Guardería', icon: '🏠', image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=300&fit=crop' },
@@ -46,12 +48,12 @@ const appState = {
   appointments: []
 };
 
-// Mock user data
+// Mock user data (FOR DEMO PURPOSES ONLY - Never store passwords in plain text in production!)
 const mockUsers = {
   'demo@paseo.com': {
     name: 'Loren',
     email: 'demo@paseo.com',
-    password: 'demo123',
+    password: 'demo123', // In production, this should be a hashed password
     role: 'owner'
   }
 };

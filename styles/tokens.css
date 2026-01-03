@@ -8,6 +8,9 @@
   --color-accent: #4A90E2;
   --color-border: #E0E0E0;
   --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-error: #dc3545;
+  --color-success: #28a745;
+  --color-info: #111111;
   
   /* Radius */
   --radius-large: 20px;
