@@ -3,6 +3,34 @@
  * Handles state management, interactions, and component initialization
  */
 
+/**
+ * Show notification message
+ * @param {string} message - Message to display
+ * @param {string} type - Type of notification (error, success, info)
+ */
+function showNotification(message, type = 'info') {
+  // Remove existing notification if any
+  const existing = document.querySelector('.notification');
+  if (existing) {
+    existing.remove();
+  }
+
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.textContent = message;
+  
+  document.body.appendChild(notification);
+  
+  // Trigger animation
+  setTimeout(() => notification.classList.add('show'), 10);
+  
+  // Auto-remove after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => notification.remove(), 300);
+  }, 3000);
+}
+
 // Application State
 const appState = {
   currentUser: null,
@@ -68,7 +96,7 @@ function setupLoginForm() {
         router.navigate('home-screen');
         updateHomeGreeting();
       } else {
-        alert('Credenciales incorrectas. Usa: demo@paseo.com / demo123');
+        showNotification('Credenciales incorrectas. Usa: demo@paseo.com / demo123', 'error');
       }
     });
   }
@@ -193,7 +221,7 @@ function setupServicesScreen() {
   const serviceCards = document.querySelectorAll('.service-detail-card');
   serviceCards.forEach(card => {
     card.addEventListener('click', () => {
-      alert('Servicio seleccionado. Funcionalidad de reserva próximamente.');
+      showNotification('Servicio seleccionado. Funcionalidad de reserva próximamente.', 'info');
     });
   });
 }
@@ -238,7 +266,7 @@ function renderServices() {
   const serviceCards = document.querySelectorAll('.service-detail-card');
   serviceCards.forEach(card => {
     card.addEventListener('click', () => {
-      alert('Servicio seleccionado. Funcionalidad de reserva próximamente.');
+      showNotification('Servicio seleccionado. Funcionalidad de reserva próximamente.', 'info');
     });
   });
 }

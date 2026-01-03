@@ -36,7 +36,7 @@ class Router {
     }
 
     // Add to history
-    if (addToHistory && this.currentScreen !== name) {
+    if (addToHistory && this.currentScreen !== name && this.currentScreen !== null) {
       this.history.push(this.currentScreen);
     }
 
