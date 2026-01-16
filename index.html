@@ -712,96 +712,142 @@ input:checked + .toggle-slider:before{
   <!-- HOME - DUEÑO -->
   <section id="home" class="screen">
     <div class="container">
-      <div class="header">
-        <h2>Hola, María</h2>
-        <p>Encuentra paseadores para Rocky</p>
+      <div class="header" style="border-bottom:none;padding-bottom:8px;">
+        <div class="flex-between">
+          <div>
+            <h2 style="text-align:left;margin-bottom:4px;">Hola, María</h2>
+            <p style="text-align:left;font-size:13px;">¿Listo para un paseo?</p>
+          </div>
+          <div class="dog-avatar" style="width:48px;height:48px;font-size:20px;cursor:pointer;" onclick="go('perfil')">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
       </div>
 
+      <!-- Card de próximo paseo destacada -->
+      <div class="card neo mb-16" style="background:linear-gradient(135deg, var(--primary), var(--secondary));color:white;cursor:pointer;" onclick="go('paseo-detail')">
+        <div class="flex-between mb-8">
+          <div>
+            <small style="color:rgba(255,255,255,0.9);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">Próximo paseo</small>
+            <h3 style="margin-top:4px;font-size:20px;">Rocky con Carlos</h3>
+          </div>
+          <i class="fas fa-chevron-right" style="font-size:20px;opacity:0.8;"></i>
+        </div>
+        <div class="flex gap-16" style="margin-top:12px;">
+          <div>
+            <i class="fas fa-clock" style="margin-right:6px;"></i>
+            <span style="font-size:13px;">Mañana 10:00 AM</span>
+          </div>
+          <div>
+            <i class="fas fa-map-marker-alt" style="margin-right:6px;"></i>
+            <span style="font-size:13px;">Parque Central</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mis perros - Primera sección -->
       <div class="mb-20">
+        <div class="flex-between mb-12">
+          <h3 style="font-size:16px;">Mis perros</h3>
+          <button class="btn small" onclick="go('add-dog')" style="padding:6px 12px;font-size:13px;">
+            <i class="fas fa-plus"></i> Añadir
+          </button>
+        </div>
+        
+        <div class="dog-card neo" onclick="go('dog-detail')" style="cursor:pointer;padding:16px;">
+          <div class="flex gap-16">
+            <div class="dog-avatar" style="background:var(--primary);width:56px;height:56px;font-size:26px;">
+              <i class="fas fa-dog"></i>
+            </div>
+            <div style="flex:1;">
+              <div class="flex-between mb-4">
+                <h3 style="font-size:17px;">Rocky</h3>
+                <i class="fas fa-chevron-right" style="color:var(--muted);font-size:14px;"></i>
+              </div>
+              <p style="font-size:13px;margin-bottom:6px;">Labrador · 3 años</p>
+              <div class="dog-meta">
+                <span><i class="fas fa-ruler"></i> Grande</span>
+                <span><i class="fas fa-bolt"></i> Energético</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buscador -->
+      <div class="mb-16">
         <div class="input-group">
-          <div class="input" style="display:flex;align-items:center;gap:12px;">
+          <div class="input" style="display:flex;align-items:center;gap:12px;padding:12px 16px;">
             <i class="fas fa-search" style="color:var(--muted);"></i>
-            <input type="text" placeholder="Buscar paseadores..." style="border:none;background:transparent;flex:1;outline:none;">
+            <input type="text" placeholder="Buscar paseadores..." style="border:none;background:transparent;flex:1;outline:none;font-size:14px;">
           </div>
         </div>
       </div>
 
-      <h3 class="mb-16">Paseadores cercanos</h3>
-      
-      <div class="dog-card neo mb-12" onclick="go('walker-detail')">
-        <div class="flex gap-16">
-          <div class="dog-avatar">C</div>
-          <div style="flex:1;">
-            <div class="flex-between mb-8">
-              <h3>Carlos Rodríguez</h3>
-              <div class="rating">★★★★★</div>
+      <!-- Paseadores cercanos -->
+      <div>
+        <h3 class="mb-12" style="font-size:16px;">Paseadores cerca de ti</h3>
+        
+        <div class="dog-card neo mb-12" onclick="go('walker-detail')" style="cursor:pointer;padding:16px;">
+          <div class="flex gap-16">
+            <div class="dog-avatar" style="width:56px;height:56px;font-size:22px;">C</div>
+            <div style="flex:1;">
+              <div class="flex-between mb-4">
+                <div>
+                  <h3 style="font-size:16px;margin-bottom:2px;">Carlos Rodríguez</h3>
+                  <div class="rating" style="font-size:14px;">★★★★★</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color:var(--muted);font-size:14px;"></i>
+              </div>
+              <div class="dog-meta mb-8" style="font-size:12px;">
+                <span><i class="fas fa-clock"></i> 8:00 - 18:00</span>
+                <span><i class="fas fa-map-marker-alt"></i> 0.8 km</span>
+              </div>
+              <div class="status available" style="font-size:11px;padding:3px 10px;">Disponible ahora</div>
             </div>
-            <div class="dog-meta mb-8">
-              <span><i class="fas fa-clock"></i> 8:00 - 18:00</span>
-              <span><i class="fas fa-map-marker-alt"></i> 0.8 km</span>
-            </div>
-            <div class="status available">Disponible ahora</div>
           </div>
         </div>
-      </div>
 
-      <div class="dog-card neo mb-12" onclick="go('walker-detail')">
-        <div class="flex gap-16">
-          <div class="dog-avatar" style="background:linear-gradient(135deg, #8FADD3, #7A9BC4);">L</div>
-          <div style="flex:1;">
-            <div class="flex-between mb-8">
-              <h3>Laura Martínez</h3>
-              <div class="rating">★★★★☆</div>
+        <div class="dog-card neo mb-12" onclick="go('walker-detail')" style="cursor:pointer;padding:16px;">
+          <div class="flex gap-16">
+            <div class="dog-avatar" style="background:linear-gradient(135deg, #8FADD3, #7A9BC4);width:56px;height:56px;font-size:22px;">L</div>
+            <div style="flex:1;">
+              <div class="flex-between mb-4">
+                <div>
+                  <h3 style="font-size:16px;margin-bottom:2px;">Laura Martínez</h3>
+                  <div class="rating" style="font-size:14px;">★★★★☆</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color:var(--muted);font-size:14px;"></i>
+              </div>
+              <div class="dog-meta mb-8" style="font-size:12px;">
+                <span><i class="fas fa-clock"></i> 9:00 - 17:00</span>
+                <span><i class="fas fa-map-marker-alt"></i> 1.2 km</span>
+              </div>
+              <div class="status pending" style="font-size:11px;padding:3px 10px;">Mañana</div>
             </div>
-            <div class="dog-meta mb-8">
-              <span><i class="fas fa-clock"></i> 9:00 - 17:00</span>
-              <span><i class="fas fa-map-marker-alt"></i> 1.2 km</span>
-            </div>
-            <div class="status pending">Mañana</div>
           </div>
         </div>
-      </div>
 
-      <div class="dog-card neo mb-12" onclick="go('walker-detail')">
-        <div class="flex gap-16">
-          <div class="dog-avatar" style="background:linear-gradient(135deg, #7A9BC4, #567CA3);">M</div>
-          <div style="flex:1;">
-            <div class="flex-between mb-8">
-              <h3>María García</h3>
-              <div class="rating">★★★★½</div>
-            </div>
-            <div class="dog-meta mb-8">
-              <span><i class="fas fa-clock"></i> 7:00 - 19:00</span>
-              <span><i class="fas fa-map-marker-alt"></i> 0.5 km</span>
-            </div>
-            <div class="status available">Disponible</div>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="mb-16 mt-20">Mis perros</h3>
-      
-      <div class="dog-card neo mb-12" onclick="go('dog-detail')">
-        <div class="flex gap-16">
-          <div class="dog-avatar" style="background:var(--primary);">
-            <i class="fas fa-dog"></i>
-          </div>
-          <div style="flex:1;">
-            <div class="flex-between mb-8">
-              <h3>Rocky</h3>
-              <small>Labrador · 3 años</small>
-            </div>
-            <div class="dog-meta">
-              <span><i class="fas fa-ruler"></i> Grande</span>
-              <span><i class="fas fa-bolt"></i> Energético</span>
+        <div class="dog-card neo mb-12" onclick="go('walker-detail')" style="cursor:pointer;padding:16px;">
+          <div class="flex gap-16">
+            <div class="dog-avatar" style="background:linear-gradient(135deg, #7A9BC4, #567CA3);width:56px;height:56px;font-size:22px;">M</div>
+            <div style="flex:1;">
+              <div class="flex-between mb-4">
+                <div>
+                  <h3 style="font-size:16px;margin-bottom:2px;">María García</h3>
+                  <div class="rating" style="font-size:14px;">★★★★½</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color:var(--muted);font-size:14px;"></i>
+              </div>
+              <div class="dog-meta mb-8" style="font-size:12px;">
+                <span><i class="fas fa-clock"></i> 7:00 - 19:00</span>
+                <span><i class="fas fa-map-marker-alt"></i> 0.5 km</span>
+              </div>
+              <div class="status available" style="font-size:11px;padding:3px 10px;">Disponible</div>
             </div>
           </div>
         </div>
       </div>
-
-      <button class="btn w-100 mt-20" onclick="go('add-dog')">
-        <i class="fas fa-plus"></i> Añadir otro perro
-      </button>
     </div>
   </section>
 
