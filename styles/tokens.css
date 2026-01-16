@@ -1,29 +1,17 @@
 :root {
-  /* Colores */
-  --background-color: #F5F5F5;
-  --card-background: #FFFFFF;
-  --primary-color: #111111;
-  --muted-text: #7A7A7A;
+  --bg: #f5f7fa;
+  --surface: #f1f5f9;
 
-  /* Radios */
-  --radius-large: 20px;
-  --radius-medium: 14px;
+  --primary-blue: #567CA3;
+  --border-gray: #567CA3;
+  --text-gray: #567CA3;
 
-  /* Sombras */
-  --box-shadow: 
-    inset 0 1px 2px rgba(0, 0, 0, 0.06),
-    0 1px 1px rgba(255, 255, 255, 0.8);
+  --radius-pill: 30px;
+  --radius-button: 24px;
 
-  /* Tipografía */
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --title-font-weight: bold;
-  --title-letter-spacing: -0.02em;
-  --font-size-large: 1.5rem;
-  --font-size-base: 1rem;
-  --font-size-small: 0.875rem;
+  --shadow-neu:
+    -8px -8px 16px #ffffff,
+     8px  8px 16px #ced5e9;
 
-  /* Espaciados */
-  --spacing-base: 16px;
-  --spacing-large: 24px;
-  --spacing-small: 8px;
+  --font: "Poppins", system-ui, sans-serif;
 }
