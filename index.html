@@ -1,17 +1,1204 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PASEO 🐾</title>
+<meta charset="UTF-8">
+<title>Paseo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <link rel="stylesheet" href="styles/tokens.css" />
-  <link rel="stylesheet" href="styles/base.css" />
-  <link rel="stylesheet" href="styles/components.css" />
+<style>
+:root{
+  --bg:#ECECEC;
+  --surface:#ECECEC;
+  --light:#FFFFFF;
+  --shadow:#C9C9C9;
+  --primary:#567CA3;
+  --secondary:#7A9BC4;
+  --accent:#8FADD3;
+  --text:#2F2F2F;
+  --muted:#7A7A7A;
+  --success:#4CAF50;
+  --warning:#FF9800;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.app{
+  width:100%;
+  max-width:430px;
+  height:100vh;
+  max-height:926px;
+  position:relative;
+  overflow:hidden;
+  background:var(--bg);
+  border-radius:24px;
+  box-shadow:20px 20px 60px var(--shadow),
+             -20px -20px 60px var(--light);
+}
+
+/* neumorfismo */
+.neo{
+  background:var(--surface);
+  border-radius:20px;
+  box-shadow:8px 8px 16px var(--shadow),
+            -8px -8px 16px var(--light);
+}
+
+.neo-inset{
+  background:var(--surface);
+  border-radius:16px;
+  box-shadow:inset 6px 6px 12px var(--shadow),
+            inset -6px -6px 12px var(--light);
+}
+
+.neo-flat{
+  background:var(--surface);
+  border-radius:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* textos */
+h1,h2,h3,h4{
+  margin:0;
+  font-weight:600;
+}
+
+h1{font-size:28px;}
+h2{font-size:22px;}
+h3{font-size:18px;}
+h4{font-size:16px;}
+
+p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.4;
+}
+
+small{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* botones */
+.btn{
+  padding:14px 20px;
+  border-radius:16px;
+  text-align:center;
+  cursor:pointer;
+  user-select:none;
+  border:none;
+  font-size:16px;
+  font-weight:500;
+  transition:all 0.2s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.btn:active{
+  transform:scale(0.98);
+}
+
+.btn.primary{
+  background:var(--primary);
+  color:#fff;
+  box-shadow:6px 6px 12px rgba(0,0,0,.15),
+            -6px -6px 12px rgba(255,255,255,.35);
+}
+
+.btn.secondary{
+  background:var(--secondary);
+  color:#fff;
+  box-shadow:6px 6px 12px rgba(0,0,0,.1);
+}
+
+.btn.accent{
+  background:var(--accent);
+  color:#fff;
+  box-shadow:6px 6px 12px rgba(0,0,0,.1);
+}
+
+.btn.large{
+  padding:18px;
+  font-size:18px;
+  font-weight:600;
+}
+
+.btn.small{
+  padding:8px 16px;
+  font-size:14px;
+}
+
+/* layout */
+.container{
+  padding:20px;
+  height:calc(100vh - 70px);
+  overflow-y:auto;
+  padding-bottom:90px;
+}
+
+.card{
+  padding:20px;
+  margin-bottom:16px;
+}
+
+.flex{
+  display:flex;
+  align-items:center;
+}
+
+.flex-between{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.flex-center{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.gap-12{gap:12px;}
+.gap-16{gap:16px;}
+.gap-20{gap:20px;}
+
+/* pantallas */
+.screen{
+  display:none;
+  height:100%;
+}
+
+.screen.active{
+  display:block;
+  animation:fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* header */
+.header{
+  padding:20px;
+  text-align:center;
+  background:var(--bg);
+  border-bottom:1px solid rgba(0,0,0,0.05);
+}
+
+.header h1{
+  margin-bottom:8px;
+  color:var(--primary);
+}
+
+/* nav */
+.nav{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:16px 20px;
+  background:var(--bg);
+  border-top:1px solid rgba(0,0,0,0.05);
+  display:flex;
+  justify-content:space-around;
+  gap:8px;
+}
+
+.nav-btn{
+  flex:1;
+  padding:12px;
+  border-radius:16px;
+  text-align:center;
+  cursor:pointer;
+  color:var(--muted);
+  font-size:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  transition:all 0.3s ease;
+  background:transparent;
+  border:none;
+}
+
+.nav-btn.active{
+  color:var(--primary);
+  background:var(--light);
+  box-shadow:4px 4px 8px var(--shadow),
+            -4px -4px 8px var(--light);
+}
+
+.nav-btn i{
+  font-size:20px;
+}
+
+/* formularios */
+.input-group{
+  margin-bottom:16px;
+}
+
+.input-label{
+  display:block;
+  margin-bottom:8px;
+  font-weight:500;
+  color:var(--text);
+  font-size:14px;
+}
+
+.input{
+  width:100%;
+  padding:16px;
+  border-radius:16px;
+  border:none;
+  background:var(--bg);
+  box-shadow:inset 4px 4px 8px var(--shadow),
+            inset -4px -4px 8px var(--light);
+  font-size:16px;
+  color:var(--text);
+  outline:none;
+}
+
+.input:focus{
+  box-shadow:inset 6px 6px 12px var(--shadow),
+            inset -6px -6px 12px var(--light);
+}
+
+/* tarjetas de perro */
+.dog-card{
+  position:relative;
+  overflow:hidden;
+  transition:all 0.3s ease;
+}
+
+.dog-card:active{
+  transform:scale(0.98);
+}
+
+.dog-avatar{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--primary), var(--secondary));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:24px;
+  font-weight:bold;
+  margin-right:16px;
+}
+
+.dog-info h3{
+  margin-bottom:4px;
+}
+
+.dog-meta{
+  display:flex;
+  gap:12px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.status{
+  display:inline-block;
+  padding:4px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:500;
+  margin-top:8px;
+}
+
+.status.available{
+  background:var(--secondary);
+  color:white;
+}
+
+.status.pending{
+  background:var(--accent);
+  color:white;
+}
+
+/* rating */
+.rating{
+  color:var(--accent);
+  font-size:20px;
+  letter-spacing:2px;
+}
+
+.rating-stars{
+  display:flex;
+  gap:4px;
+  margin:8px 0;
+}
+
+.star{
+  color:var(--accent);
+  font-size:24px;
+  cursor:pointer;
+}
+
+/* mapa */
+.map-container{
+  height:200px;
+  border-radius:16px;
+  overflow:hidden;
+  margin:16px 0;
+  background:linear-gradient(135deg, var(--secondary), var(--primary));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:20px;
+}
+
+/* progress */
+.progress-bar{
+  height:8px;
+  background:var(--bg);
+  border-radius:4px;
+  overflow:hidden;
+  margin:16px 0;
+  box-shadow:inset 2px 2px 4px var(--shadow),
+            inset -2px -2px 4px var(--light);
+}
+
+.progress-fill{
+  height:100%;
+  background:var(--primary);
+  border-radius:4px;
+  transition:width 0.3s ease;
+}
+
+/* stats */
+.stats-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin:20px 0;
+}
+
+.stat-card{
+  padding:16px;
+  text-align:center;
+}
+
+.stat-number{
+  font-size:32px;
+  font-weight:700;
+  margin-bottom:4px;
+  color:var(--primary);
+}
+
+.stat-label{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* chat */
+.chat-container{
+  height:300px;
+  overflow-y:auto;
+  padding:16px;
+  background:var(--bg);
+  border-radius:16px;
+  margin:16px 0;
+  box-shadow:inset 4px 4px 8px var(--shadow),
+            inset -4px -4px 8px var(--light);
+}
+
+.message{
+  max-width:80%;
+  padding:12px 16px;
+  border-radius:20px;
+  margin-bottom:12px;
+  clear:both;
+}
+
+.message.received{
+  background:var(--light);
+  float:left;
+  box-shadow:4px 4px 8px var(--shadow);
+}
+
+.message.sent{
+  background:var(--primary);
+  color:white;
+  float:right;
+  box-shadow:4px 4px 8px rgba(0,0,0,0.2);
+}
+
+.chat-input{
+  display:flex;
+  gap:8px;
+}
+
+/* notifications */
+.notification-badge{
+  position:absolute;
+  top:-4px;
+  right:-4px;
+  width:20px;
+  height:20px;
+  background:var(--primary);
+  color:white;
+  border-radius:50%;
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* toggle */
+.toggle{
+  position:relative;
+  width:60px;
+  height:30px;
+}
+
+.toggle input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.toggle-slider{
+  position:absolute;
+  cursor:pointer;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:var(--bg);
+  border-radius:34px;
+  box-shadow:inset 4px 4px 8px var(--shadow),
+            inset -4px -4px 8px var(--light);
+  transition:.4s;
+}
+
+.toggle-slider:before{
+  position:absolute;
+  content:"";
+  height:22px;
+  width:22px;
+  left:4px;
+  bottom:4px;
+  background:var(--primary);
+  border-radius:50%;
+  transition:.4s;
+  box-shadow:2px 2px 4px rgba(0,0,0,0.2);
+}
+
+input:checked + .toggle-slider{
+  background:var(--secondary);
+}
+
+input:checked + .toggle-slider:before{
+  transform:translateX(30px);
+}
+
+/* modal */
+.modal-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,0.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+  padding:20px;
+}
+
+.modal-overlay.active{
+  display:flex;
+}
+
+.modal{
+  background:var(--bg);
+  border-radius:24px;
+  padding:24px;
+  max-width:400px;
+  width:100%;
+  animation:slideUp 0.3s ease;
+  box-shadow:20px 20px 60px rgba(0,0,0,0.3);
+}
+
+@keyframes slideUp{
+  from{transform:translateY(50px); opacity:0;}
+  to{transform:translateY(0); opacity:1;}
+}
+
+/* utilities */
+.text-center{text-align:center;}
+.mb-8{margin-bottom:8px;}
+.mb-12{margin-bottom:12px;}
+.mb-16{margin-bottom:16px;}
+.mb-20{margin-bottom:20px;}
+.mb-24{margin-bottom:24px;}
+.mt-8{margin-top:8px;}
+.mt-12{margin-top:12px;}
+.mt-16{margin-top:16px;}
+.mt-20{margin-top:20px;}
+.w-100{width:100%;}
+.hidden{display:none;}
+
+/* scrollbar */
+::-webkit-scrollbar{
+  width:6px;
+}
+
+::-webkit-scrollbar-track{
+  background:var(--bg);
+  border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:var(--shadow);
+  border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:var(--muted);
+}
+</style>
 </head>
 
 <body>
-  <div id="app"></div>
-  <script src="js/app.js"></script>
+
+<div class="app">
+
+  <!-- SPLASH -->
+  <section id="splash" class="screen active">
+    <div class="container flex-center" style="flex-direction:column; height:100%;">
+      <div class="mb-24" style="text-align:center;">
+        <div class="dog-avatar" style="width:120px;height:120px;margin:0 auto 24px;font-size:48px;">
+          <i class="fas fa-paw"></i>
+        </div>
+        <h1 style="font-size:48px;color:var(--primary);">Paseo</h1>
+        <p style="font-size:18px;">Conecta con paseadores de perros</p>
+      </div>
+      <button class="btn primary large w-100 mb-12" onclick="go('login')">
+        <i class="fas fa-sign-in-alt"></i> Comenzar
+      </button>
+      <button class="btn w-100" onclick="go('register')">
+        Crear cuenta nueva
+      </button>
+    </div>
+  </section>
+
+  <!-- LOGIN -->
+  <section id="login" class="screen">
+    <div class="container">
+      <div class="header">
+        <h2>Iniciar sesión</h2>
+        <p>Ingresa a tu cuenta de Paseo</p>
+      </div>
+
+      <div class="mb-24">
+        <div class="input-group">
+          <label class="input-label">Email</label>
+          <input type="email" class="input" placeholder="tu@email.com">
+        </div>
+        
+        <div class="input-group">
+          <label class="input-label">Contraseña</label>
+          <input type="password" class="input" placeholder="••••••••">
+        </div>
+        
+        <div class="flex-between mb-20">
+          <label class="flex gap-12" style="align-items:center;cursor:pointer;">
+            <div class="toggle">
+              <input type="checkbox">
+              <span class="toggle-slider"></span>
+            </div>
+            <span style="font-size:14px;">Recordarme</span>
+          </label>
+          <a href="#" style="color:var(--primary);text-decoration:none;font-size:14px;">
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+        
+        <button class="btn primary w-100 mb-12" onclick="go('home')">
+          <i class="fas fa-sign-in-alt"></i> Ingresar
+        </button>
+        
+        <button class="btn w-100" onclick="go('splash')">
+          <i class="fas fa-arrow-left"></i> Volver
+        </button>
+      </div>
+      
+      <div class="text-center">
+        <p>¿No tienes cuenta? <a href="#" style="color:var(--primary);" onclick="go('register')">Regístrate aquí</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRO -->
+  <section id="register" class="screen">
+    <div class="container">
+      <div class="header">
+        <h2>Crear cuenta</h2>
+        <p>Únete a la comunidad de Paseo</p>
+      </div>
+
+      <div class="mb-24">
+        <div class="input-group">
+          <label class="input-label">Nombre completo</label>
+          <input type="text" class="input" placeholder="Tu nombre">
+        </div>
+        
+        <div class="input-group">
+          <label class="input-label">Email</label>
+          <input type="email" class="input" placeholder="tu@email.com">
+        </div>
+        
+        <div class="input-group">
+          <label class="input-label">Contraseña</label>
+          <input type="password" class="input" placeholder="••••••••">
+        </div>
+        
+        <div class="input-group">
+          <label class="input-label">Confirmar contraseña</label>
+          <input type="password" class="input" placeholder="••••••••">
+        </div>
+        
+        <div class="input-group">
+          <label class="input-label">Teléfono</label>
+          <input type="tel" class="input" placeholder="+34 123 456 789">
+        </div>
+        
+        <div class="input-group mb-20">
+          <label class="input-label">Soy</label>
+          <div class="flex gap-12">
+            <button class="btn flex-1" onclick="setUserType('owner')">
+              <i class="fas fa-user"></i> Dueño
+            </button>
+            <button class="btn flex-1" onclick="setUserType('walker')">
+              <i class="fas fa-walking"></i> Paseador
+            </button>
+          </div>
+        </div>
+        
+        <button class="btn primary w-100 mb-12" onclick="go('login')">
+          <i class="fas fa-user-plus"></i> Crear cuenta
+        </button>
+        
+        <button class="btn w-100" onclick="go('splash')">
+          <i class="fas fa-arrow-left"></i> Volver
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOME - DUEÑO -->
+  <section id="home" class="screen">
+    <div class="container">
+      <div class="header">
+        <h2>Hola, María</h2>
+        <p>Encuentra paseadores para Rocky</p>
+      </div>
+
+      <div class="mb-20">
+        <div class="input-group">
+          <div class="input" style="display:flex;align-items:center;gap:12px;">
+            <i class="fas fa-search" style="color:var(--muted);"></i>
+            <input type="text" placeholder="Buscar paseadores..." style="border:none;background:transparent;flex:1;outline:none;">
+          </div>
+        </div>
+      </div>
+
+      <h3 class="mb-16">Paseadores cercanos</h3>
+      
+      <div class="dog-card neo mb-12" onclick="go('walker-detail')">
+        <div class="flex gap-16">
+          <div class="dog-avatar">C</div>
+          <div style="flex:1;">
+            <div class="flex-between mb-8">
+              <h3>Carlos Rodríguez</h3>
+              <div class="rating">★★★★★</div>
+            </div>
+            <div class="dog-meta mb-8">
+              <span><i class="fas fa-clock"></i> 8:00 - 18:00</span>
+              <span><i class="fas fa-map-marker-alt"></i> 0.8 km</span>
+            </div>
+            <div class="status available">Disponible ahora</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dog-card neo mb-12" onclick="go('walker-detail')">
+        <div class="flex gap-16">
+          <div class="dog-avatar" style="background:linear-gradient(135deg, #8FADD3, #7A9BC4);">L</div>
+          <div style="flex:1;">
+            <div class="flex-between mb-8">
+              <h3>Laura Martínez</h3>
+              <div class="rating">★★★★☆</div>
+            </div>
+            <div class="dog-meta mb-8">
+              <span><i class="fas fa-clock"></i> 9:00 - 17:00</span>
+              <span><i class="fas fa-map-marker-alt"></i> 1.2 km</span>
+            </div>
+            <div class="status pending">Mañana</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dog-card neo mb-12" onclick="go('walker-detail')">
+        <div class="flex gap-16">
+          <div class="dog-avatar" style="background:linear-gradient(135deg, #7A9BC4, #567CA3);">M</div>
+          <div style="flex:1;">
+            <div class="flex-between mb-8">
+              <h3>María García</h3>
+              <div class="rating">★★★★½</div>
+            </div>
+            <div class="dog-meta mb-8">
+              <span><i class="fas fa-clock"></i> 7:00 - 19:00</span>
+              <span><i class="fas fa-map-marker-alt"></i> 0.5 km</span>
+            </div>
+            <div class="status available">Disponible</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="mb-16 mt-20">Mis perros</h3>
+      
+      <div class="dog-card neo mb-12" onclick="go('dog-detail')">
+        <div class="flex gap-16">
+          <div class="dog-avatar" style="background:var(--primary);">
+            <i class="fas fa-dog"></i>
+          </div>
+          <div style="flex:1;">
+            <div class="flex-between mb-8">
+              <h3>Rocky</h3>
+              <small>Labrador · 3 años</small>
+            </div>
+            <div class="dog-meta">
+              <span><i class="fas fa-ruler"></i> Grande</span>
+              <span><i class="fas fa-bolt"></i> Energético</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn w-100 mt-20" onclick="go('add-dog')">
+        <i class="fas fa-plus"></i> Añadir otro perro
+      </button>
+    </div>
+  </section>
+
+  <!-- DETALLE PASEO -->
+  <section id="paseo-detail" class="screen">
+    <div class="container">
+      <div class="header">
+        <button class="btn small" onclick="go('home')" style="position:absolute;left:20px;top:20px;">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h2>Paseo programado</h2>
+      </div>
+
+      <div class="card neo mb-16">
+        <div class="flex-center mb-16">
+          <div class="dog-avatar" style="width:80px;height:80px;font-size:32px;">
+            <i class="fas fa-dog"></i>
+          </div>
+        </div>
+        
+        <h3 class="text-center mb-8">Rocky</h3>
+        <p class="text-center mb-16">Mañana 10:00 AM · 30 minutos</p>
+        
+        <div class="mb-16">
+          <div class="flex-between mb-8">
+            <strong>Paseador:</strong>
+            <span>Carlos Rodríguez</span>
+          </div>
+          <div class="flex-between mb-8">
+            <strong>Duración:</strong>
+            <span>30 minutos</span>
+          </div>
+          <div class="flex-between mb-8">
+            <strong>Precio:</strong>
+            <span style="color:var(--primary);font-weight:600;">$15</span>
+          </div>
+          <div class="flex-between">
+            <strong>Ubicación:</strong>
+            <span>Parque Central</span>
+          </div>
+        </div>
+        
+        <div class="map-container mb-16">
+          <i class="fas fa-map-marked-alt"></i>
+          <span style="margin-left:8px;">Ver en mapa</span>
+        </div>
+      </div>
+
+      <button class="btn primary w-100 mb-12" onclick="go('paseo-active')">
+        <i class="fas fa-play"></i> Iniciar paseo
+      </button>
+      
+      <button class="btn secondary w-100 mb-12">
+        <i class="fas fa-edit"></i> Modificar
+      </button>
+      
+      <button class="btn w-100" style="color:var(--primary);">
+        <i class="fas fa-times"></i> Cancelar paseo
+      </button>
+    </div>
+  </section>
+
+  <!-- PASEO ACTIVO -->
+  <section id="paseo-active" class="screen">
+    <div class="container">
+      <div class="header">
+        <h2>Paseo en curso</h2>
+        <p>Rocky con Carlos</p>
+      </div>
+
+      <div class="card neo mb-16">
+        <div class="text-center mb-16">
+          <div class="dog-avatar" style="width:100px;height:100px;margin:0 auto 16px;font-size:40px;">
+            <i class="fas fa-dog"></i>
+          </div>
+          <h3>Rocky está paseando</h3>
+          <p>Con Carlos Rodríguez</p>
+        </div>
+
+        <div class="mb-16">
+          <div class="flex-between mb-12">
+            <strong>Tiempo transcurrido:</strong>
+            <span style="color:var(--primary);font-size:20px;font-weight:600;">12:45</span>
+          </div>
+          
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:42%;"></div>
+          </div>
+          
+          <div class="flex-between mt-8">
+            <small>0 min</small>
+            <small>30 min</small>
+          </div>
+        </div>
+
+        <div class="mb-16">
+          <div class="flex-between mb-8">
+            <strong>Distancia:</strong>
+            <span>1.2 km</span>
+          </div>
+          <div class="flex-between mb-8">
+            <strong>Ritmo:</strong>
+            <span>Moderado</span>
+          </div>
+          <div class="flex-between">
+            <strong>Última actualización:</strong>
+            <span>Hace 2 min</span>
+          </div>
+        </div>
+
+        <div class="map-container mb-16">
+          <i class="fas fa-map-marked-alt"></i>
+          <span style="margin-left:8px;">Seguimiento en vivo</span>
+        </div>
+      </div>
+
+      <div class="flex gap-12">
+        <button class="btn flex-1" onclick="openModal('emergency-modal')">
+          <i class="fas fa-exclamation-triangle"></i> Emergencia
+        </button>
+        <button class="btn primary flex-1" onclick="go('paseo-completed')">
+          <i class="fas fa-flag-checkered"></i> Finalizar
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASEO COMPLETADO -->
+  <section id="paseo-completed" class="screen">
+    <div class="container">
+      <div class="header">
+        <h2>Paseo completado</h2>
+        <p>¡Excelente trabajo!</p>
+      </div>
+
+      <div class="card neo mb-16">
+        <div class="text-center mb-16">
+          <div class="dog-avatar" style="width:80px;height:80px;margin:0 auto 16px;background:var(--success);font-size:32px;">
+            <i class="fas fa-check"></i>
+          </div>
+          <h3>Paseo completado</h3>
+          <p>Rocky está de vuelta en casa</p>
+        </div>
+
+        <div class="stats-grid mb-16">
+          <div class="stat-card neo">
+            <div class="stat-number">30</div>
+            <div class="stat-label">minutos</div>
+          </div>
+          <div class="stat-card neo">
+            <div class="stat-number">2.1</div>
+            <div class="stat-label">kilómetros</div>
+          </div>
+        </div>
+
+        <div class="mb-16">
+          <h4 class="mb-12">Fotos del paseo</h4>
+          <div class="flex gap-12" style="overflow-x:auto;padding-bottom:8px;">
+            <div style="min-width:80px;height:80px;background:var(--bg);border-radius:12px;flex-shrink:0;"></div>
+            <div style="min-width:80px;height:80px;background:var(--bg);border-radius:12px;flex-shrink:0;"></div>
+            <div style="min-width:80px;height:80px;background:var(--bg);border-radius:12px;flex-shrink:0;"></div>
+          </div>
+        </div>
+
+        <div class="mb-16">
+          <h4 class="mb-12">Califica el paseo</h4>
+          <div class="rating-stars">
+            <i class="fas fa-star star" onclick="rateWalk(1)"></i>
+            <i class="fas fa-star star" onclick="rateWalk(2)"></i>
+            <i class="fas fa-star star" onclick="rateWalk(3)"></i>
+            <i class="fas fa-star star" onclick="rateWalk(4)"></i>
+            <i class="far fa-star star" onclick="rateWalk(5)"></i>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Comentario (opcional)</label>
+          <textarea class="input" placeholder="¿Cómo fue el paseo?" rows="3" style="resize:none;"></textarea>
+        </div>
+      </div>
+
+      <button class="btn primary w-100 mb-12" onclick="go('home')">
+        <i class="fas fa-home"></i> Volver al inicio
+      </button>
+      
+      <button class="btn w-100">
+        <i class="fas fa-share"></i> Compartir experiencia
+      </button>
+    </div>
+  </section>
+
+  <!-- PERFIL -->
+  <section id="perfil" class="screen">
+    <div class="container">
+      <div class="header">
+        <h2>Mi perfil</h2>
+        <p>María González</p>
+      </div>
+
+      <div class="card neo mb-16">
+        <div class="flex-center mb-16">
+          <div class="dog-avatar" style="width:100px;height:100px;font-size:40px;background:linear-gradient(135deg, var(--primary), var(--secondary));">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
+        
+        <h3 class="text-center mb-8">María González</h3>
+        <p class="text-center mb-16">Dueña de Rocky · Miembro desde 2023</p>
+        
+        <div class="stats-grid mb-16">
+          <div class="stat-card neo">
+            <div class="stat-number">24</div>
+            <div class="stat-label">Paseos</div>
+          </div>
+          <div class="stat-card neo">
+            <div class="stat-number">4.8</div>
+            <div class="stat-label">Rating</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card neo mb-16">
+        <h4 class="mb-12">Configuración</h4>
+        <div class="flex-between mb-12">
+          <span>Notificaciones</span>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="flex-between mb-12">
+          <span>Ubicación en tiempo real</span>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="flex-between">
+          <span>Modo oscuro</span>
+          <label class="toggle">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card neo mb-16">
+        <h4 class="mb-12">Mis datos</h4>
+        <button class="btn w-100 mb-8" onclick="go('edit-profile')">
+          <i class="fas fa-user-edit"></i> Editar perfil
+        </button>
+        <button class="btn w-100 mb-8">
+          <i class="fas fa-credit-card"></i> Métodos de pago
+        </button>
+        <button class="btn w-100 mb-8">
+          <i class="fas fa-shield-alt"></i> Privacidad
+        </button>
+        <button class="btn w-100">
+          <i class="fas fa-question-circle"></i> Ayuda
+        </button>
+      </div>
+
+      <button class="btn w-100" style="color:var(--primary);" onclick="go('splash')">
+        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+      </button>
+    </div>
+  </section>
+
+  <!-- MODALES -->
+  <div id="emergency-modal" class="modal-overlay">
+    <div class="modal">
+      <h2 class="mb-12" style="color:var(--primary);"><i class="fas fa-exclamation-triangle"></i> Emergencia</h2>
+      <p class="mb-20">¿Necesitas ayuda inmediata? Podemos contactar al paseador y a servicios de emergencia.</p>
+      
+      <button class="btn primary w-100 mb-12" onclick="closeModal('emergency-modal')">
+        <i class="fas fa-phone"></i> Llamar al paseador
+      </button>
+      
+      <button class="btn w-100 mb-12" onclick="closeModal('emergency-modal')">
+        <i class="fas fa-ambulance"></i> Servicios de emergencia
+      </button>
+      
+      <button class="btn w-100" onclick="closeModal('emergency-modal')">
+        Cancelar
+      </button>
+    </div>
+  </div>
+
+  <!-- NAVEGACIÓN -->
+  <div class="nav">
+    <button class="nav-btn active" onclick="go('home')">
+      <i class="fas fa-home"></i>
+      <span>Inicio</span>
+    </button>
+    
+    <button class="nav-btn" onclick="go('paseo-detail')">
+      <i class="fas fa-walking"></i>
+      <span>Paseos</span>
+    </button>
+    
+    <button class="nav-btn" onclick="go('chat')">
+      <i class="fas fa-comment-dots"></i>
+      <span>Chat</span>
+      <div class="notification-badge">3</div>
+    </button>
+    
+    <button class="nav-btn" onclick="go('perfil')">
+      <i class="fas fa-user"></i>
+      <span>Perfil</span>
+    </button>
+  </div>
+
+</div>
+
+<script>
+// Navegación entre pantallas
+function go(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  
+  // Actualizar nav activo
+  const navMap = {
+    'home': 0,
+    'paseo-detail': 1,
+    'chat': 2,
+    'perfil': 3
+  };
+  
+  if (navMap[screenId] !== undefined) {
+    document.querySelectorAll('.nav-btn')[navMap[screenId]].classList.add('active');
+  }
+}
+
+// Modal functions
+function openModal(modalId) {
+  document.getElementById(modalId).classList.add('active');
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.remove('active');
+}
+
+// Cerrar modal al hacer clic fuera
+document.querySelectorAll('.modal-overlay').forEach(modal => {
+  modal.addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('active');
+    }
+  });
+});
+
+// Sistema de calificación
+let currentRating = 0;
+function rateWalk(stars) {
+  currentRating = stars;
+  const starElements = document.querySelectorAll('.star');
+  starElements.forEach((star, index) => {
+    if (index < stars) {
+      star.classList.remove('far');
+      star.classList.add('fas');
+    } else {
+      star.classList.remove('fas');
+      star.classList.add('far');
+    }
+  });
+}
+
+// Tipo de usuario
+function setUserType(type) {
+  const buttons = document.querySelectorAll('#register .btn');
+  buttons.forEach(btn => {
+    btn.style.boxShadow = '';
+    btn.style.background = '';
+  });
+  
+  const selectedBtn = document.querySelector(`#register .btn:nth-child(${type === 'owner' ? 1 : 2})`);
+  selectedBtn.style.background = 'var(--primary)';
+  selectedBtn.style.color = 'white';
+  selectedBtn.style.boxShadow = '6px 6px 12px rgba(0,0,0,.15)';
+}
+
+// Inicialización
+window.addEventListener('DOMContentLoaded', () => {
+  // Simular notificaciones
+  setInterval(() => {
+    const badge = document.querySelector('.notification-badge');
+    if (badge) {
+      const count = parseInt(badge.textContent);
+      badge.textContent = count > 0 ? count : '3';
+    }
+  }, 10000);
+  
+  // Estrellas iniciales
+  rateWalk(4);
+});
+</script>
+
 </body>
 </html>
