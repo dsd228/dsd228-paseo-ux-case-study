@@ -8,13 +8,13 @@
 
 <style>
 :root{
-  --bg:#F5F7FA;
-  --surface:#F5F7FA;
+  --bg:#ECECEC;
+  --surface:#ECECEC;
   --light:#FFFFFF;
-  --shadow:#A3B1C6;
-  --primary:#4CAF50;
-  --secondary:#0B3B6D;
-  --accent:#FFD166;
+  --shadow:#C9C9C9;
+  --primary:#567CA3;
+  --secondary:#7A9BC4;
+  --accent:#8FADD3;
   --text:#2F2F2F;
   --muted:#7A7A7A;
   --success:#4CAF50;
@@ -129,7 +129,7 @@ small{
 
 .btn.accent{
   background:var(--accent);
-  color:var(--text);
+  color:#fff;
   box-shadow:6px 6px 12px rgba(0,0,0,.1);
 }
 
@@ -332,7 +332,7 @@ small{
 
 .status.pending{
   background:var(--accent);
-  color:var(--text);
+  color:white;
 }
 
 /* rating */
@@ -559,7 +559,6 @@ input:checked + .toggle-slider:before{
 .mt-16{margin-top:16px;}
 .mt-20{margin-top:20px;}
 .w-100{width:100%;}
-.flex-1{flex:1;}
 .hidden{display:none;}
 
 /* scrollbar */
@@ -638,7 +637,7 @@ input:checked + .toggle-slider:before{
           </a>
         </div>
         
-        <button class="btn primary w-100 mb-12" onclick="handleLogin()">
+        <button class="btn primary w-100 mb-12" onclick="go('home')">
           <i class="fas fa-sign-in-alt"></i> Ingresar
         </button>
         
@@ -699,7 +698,7 @@ input:checked + .toggle-slider:before{
           </div>
         </div>
         
-        <button class="btn primary w-100 mb-12" onclick="handleRegister()">
+        <button class="btn primary w-100 mb-12" onclick="go('login')">
           <i class="fas fa-user-plus"></i> Crear cuenta
         </button>
         
@@ -713,96 +712,142 @@ input:checked + .toggle-slider:before{
   <!-- HOME - DUEÑO -->
   <section id="home" class="screen">
     <div class="container">
-      <div class="header">
-        <h2>Hola, <span data-user-name>María</span></h2>
-        <p>Encuentra paseadores para Rocky</p>
+      <div class="header" style="border-bottom:none;padding-bottom:8px;">
+        <div class="flex-between">
+          <div>
+            <h2 style="text-align:left;margin-bottom:4px;">Hola, María</h2>
+            <p style="text-align:left;font-size:13px;">¿Listo para un paseo?</p>
+          </div>
+          <div class="dog-avatar" style="width:48px;height:48px;font-size:20px;cursor:pointer;" onclick="go('perfil')">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
       </div>
 
+      <!-- Card de próximo paseo destacada -->
+      <div class="card neo mb-16" style="background:linear-gradient(135deg, var(--primary), var(--secondary));color:white;cursor:pointer;" onclick="go('paseo-detail')">
+        <div class="flex-between mb-8">
+          <div>
+            <small style="color:rgba(255,255,255,0.9);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">Próximo paseo</small>
+            <h3 style="margin-top:4px;font-size:20px;">Rocky con Carlos</h3>
+          </div>
+          <i class="fas fa-chevron-right" style="font-size:20px;opacity:0.8;"></i>
+        </div>
+        <div class="flex gap-16" style="margin-top:12px;">
+          <div>
+            <i class="fas fa-clock" style="margin-right:6px;"></i>
+            <span style="font-size:13px;">Mañana 10:00 AM</span>
+          </div>
+          <div>
+            <i class="fas fa-map-marker-alt" style="margin-right:6px;"></i>
+            <span style="font-size:13px;">Parque Central</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mis perros - Primera sección -->
       <div class="mb-20">
+        <div class="flex-between mb-12">
+          <h3 style="font-size:16px;">Mis perros</h3>
+          <button class="btn small" onclick="go('add-dog')" style="padding:6px 12px;font-size:13px;">
+            <i class="fas fa-plus"></i> Añadir
+          </button>
+        </div>
+        
+        <div class="dog-card neo" onclick="go('dog-detail')" style="cursor:pointer;padding:16px;">
+          <div class="flex gap-16">
+            <div class="dog-avatar" style="background:var(--primary);width:56px;height:56px;font-size:26px;">
+              <i class="fas fa-dog"></i>
+            </div>
+            <div style="flex:1;">
+              <div class="flex-between mb-4">
+                <h3 style="font-size:17px;">Rocky</h3>
+                <i class="fas fa-chevron-right" style="color:var(--muted);font-size:14px;"></i>
+              </div>
+              <p style="font-size:13px;margin-bottom:6px;">Labrador · 3 años</p>
+              <div class="dog-meta">
+                <span><i class="fas fa-ruler"></i> Grande</span>
+                <span><i class="fas fa-bolt"></i> Energético</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buscador -->
+      <div class="mb-16">
         <div class="input-group">
-          <div class="input" style="display:flex;align-items:center;gap:12px;">
+          <div class="input" style="display:flex;align-items:center;gap:12px;padding:12px 16px;">
             <i class="fas fa-search" style="color:var(--muted);"></i>
-            <input type="text" placeholder="Buscar paseadores..." style="border:none;background:transparent;flex:1;outline:none;">
+            <input type="text" placeholder="Buscar paseadores..." style="border:none;background:transparent;flex:1;outline:none;font-size:14px;">
           </div>
         </div>
       </div>
 
-      <h3 class="mb-16">Paseadores cercanos</h3>
-      
-      <div class="dog-card neo mb-12" onclick="go('walker-detail')">
-        <div class="flex gap-16">
-          <div class="dog-avatar">C</div>
-          <div style="flex:1;">
-            <div class="flex-between mb-8">
-              <h3>Carlos Rodríguez</h3>
-              <div class="rating">★★★★★</div>
+      <!-- Paseadores cercanos -->
+      <div>
+        <h3 class="mb-12" style="font-size:16px;">Paseadores cerca de ti</h3>
+        
+        <div class="dog-card neo mb-12" onclick="go('walker-detail')" style="cursor:pointer;padding:16px;">
+          <div class="flex gap-16">
+            <div class="dog-avatar" style="width:56px;height:56px;font-size:22px;">C</div>
+            <div style="flex:1;">
+              <div class="flex-between mb-4">
+                <div>
+                  <h3 style="font-size:16px;margin-bottom:2px;">Carlos Rodríguez</h3>
+                  <div class="rating" style="font-size:14px;">★★★★★</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color:var(--muted);font-size:14px;"></i>
+              </div>
+              <div class="dog-meta mb-8" style="font-size:12px;">
+                <span><i class="fas fa-clock"></i> 8:00 - 18:00</span>
+                <span><i class="fas fa-map-marker-alt"></i> 0.8 km</span>
+              </div>
+              <div class="status available" style="font-size:11px;padding:3px 10px;">Disponible ahora</div>
             </div>
-            <div class="dog-meta mb-8">
-              <span><i class="fas fa-clock"></i> 8:00 - 18:00</span>
-              <span><i class="fas fa-map-marker-alt"></i> 0.8 km</span>
-            </div>
-            <div class="status available">Disponible ahora</div>
           </div>
         </div>
-      </div>
 
-      <div class="dog-card neo mb-12" onclick="go('walker-detail')">
-        <div class="flex gap-16">
-          <div class="dog-avatar" style="background:linear-gradient(135deg, #FFD166, #FFB300);">L</div>
-          <div style="flex:1;">
-            <div class="flex-between mb-8">
-              <h3>Laura Martínez</h3>
-              <div class="rating">★★★★☆</div>
+        <div class="dog-card neo mb-12" onclick="go('walker-detail')" style="cursor:pointer;padding:16px;">
+          <div class="flex gap-16">
+            <div class="dog-avatar" style="background:linear-gradient(135deg, #8FADD3, #7A9BC4);width:56px;height:56px;font-size:22px;">L</div>
+            <div style="flex:1;">
+              <div class="flex-between mb-4">
+                <div>
+                  <h3 style="font-size:16px;margin-bottom:2px;">Laura Martínez</h3>
+                  <div class="rating" style="font-size:14px;">★★★★☆</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color:var(--muted);font-size:14px;"></i>
+              </div>
+              <div class="dog-meta mb-8" style="font-size:12px;">
+                <span><i class="fas fa-clock"></i> 9:00 - 17:00</span>
+                <span><i class="fas fa-map-marker-alt"></i> 1.2 km</span>
+              </div>
+              <div class="status pending" style="font-size:11px;padding:3px 10px;">Mañana</div>
             </div>
-            <div class="dog-meta mb-8">
-              <span><i class="fas fa-clock"></i> 9:00 - 17:00</span>
-              <span><i class="fas fa-map-marker-alt"></i> 1.2 km</span>
-            </div>
-            <div class="status pending">Mañana</div>
           </div>
         </div>
-      </div>
 
-      <div class="dog-card neo mb-12" onclick="go('walker-detail')">
-        <div class="flex gap-16">
-          <div class="dog-avatar" style="background:linear-gradient(135deg, #4ECDC4, #2FB8AC);">M</div>
-          <div style="flex:1;">
-            <div class="flex-between mb-8">
-              <h3>María García</h3>
-              <div class="rating">★★★★½</div>
-            </div>
-            <div class="dog-meta mb-8">
-              <span><i class="fas fa-clock"></i> 7:00 - 19:00</span>
-              <span><i class="fas fa-map-marker-alt"></i> 0.5 km</span>
-            </div>
-            <div class="status available">Disponible</div>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="mb-16 mt-20">Mis perros</h3>
-      
-      <div class="dog-card neo mb-12" onclick="selectDog('rocky')">
-        <div class="flex gap-16">
-          <div class="dog-avatar" style="background:var(--primary);">
-            <i class="fas fa-dog"></i>
-          </div>
-          <div style="flex:1;">
-            <div class="flex-between mb-8">
-              <h3>Rocky</h3>
-              <small>Labrador · 3 años</small>
-            </div>
-            <div class="dog-meta">
-              <span><i class="fas fa-ruler"></i> Grande</span>
-              <span><i class="fas fa-bolt"></i> Energético</span>
+        <div class="dog-card neo mb-12" onclick="go('walker-detail')" style="cursor:pointer;padding:16px;">
+          <div class="flex gap-16">
+            <div class="dog-avatar" style="background:linear-gradient(135deg, #7A9BC4, #567CA3);width:56px;height:56px;font-size:22px;">M</div>
+            <div style="flex:1;">
+              <div class="flex-between mb-4">
+                <div>
+                  <h3 style="font-size:16px;margin-bottom:2px;">María García</h3>
+                  <div class="rating" style="font-size:14px;">★★★★½</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color:var(--muted);font-size:14px;"></i>
+              </div>
+              <div class="dog-meta mb-8" style="font-size:12px;">
+                <span><i class="fas fa-clock"></i> 7:00 - 19:00</span>
+                <span><i class="fas fa-map-marker-alt"></i> 0.5 km</span>
+              </div>
+              <div class="status available" style="font-size:11px;padding:3px 10px;">Disponible</div>
             </div>
           </div>
         </div>
       </div>
-
-      <button class="btn w-100 mt-20" onclick="go('add-dog')">
-        <i class="fas fa-plus"></i> Añadir otro perro
-      </button>
     </div>
   </section>
 
@@ -851,7 +896,7 @@ input:checked + .toggle-slider:before{
         </div>
       </div>
 
-      <button class="btn primary w-100 mb-12" onclick="startWalk()">
+      <button class="btn primary w-100 mb-12" onclick="go('paseo-active')">
         <i class="fas fa-play"></i> Iniciar paseo
       </button>
       
@@ -885,7 +930,7 @@ input:checked + .toggle-slider:before{
         <div class="mb-16">
           <div class="flex-between mb-12">
             <strong>Tiempo transcurrido:</strong>
-            <span style="color:var(--primary);font-size:20px;font-weight:600;" data-timer>00:00</span>
+            <span style="color:var(--primary);font-size:20px;font-weight:600;">12:45</span>
           </div>
           
           <div class="progress-bar">
@@ -901,7 +946,7 @@ input:checked + .toggle-slider:before{
         <div class="mb-16">
           <div class="flex-between mb-8">
             <strong>Distancia:</strong>
-            <span data-distance>0 km</span>
+            <span>1.2 km</span>
           </div>
           <div class="flex-between mb-8">
             <strong>Ritmo:</strong>
@@ -909,7 +954,7 @@ input:checked + .toggle-slider:before{
           </div>
           <div class="flex-between">
             <strong>Última actualización:</strong>
-            <span>Ahora</span>
+            <span>Hace 2 min</span>
           </div>
         </div>
 
@@ -923,7 +968,7 @@ input:checked + .toggle-slider:before{
         <button class="btn flex-1" onclick="openModal('emergency-modal')">
           <i class="fas fa-exclamation-triangle"></i> Emergencia
         </button>
-        <button class="btn primary flex-1" onclick="completeWalk()">
+        <button class="btn primary flex-1" onclick="go('paseo-completed')">
           <i class="fas fa-flag-checkered"></i> Finalizar
         </button>
       </div>
@@ -994,25 +1039,6 @@ input:checked + .toggle-slider:before{
     </div>
   </section>
 
-  <!-- CHAT -->
-  <section id="chat" class="screen">
-    <div class="container">
-      <div class="header">
-        <h2>Chat</h2>
-        <p>Conversaciones con paseadores</p>
-      </div>
-
-      <div class="chat-container mb-16"></div>
-
-      <form class="chat-input" style="display:flex;gap:8px;">
-        <input type="text" placeholder="Escribe un mensaje..." style="flex:1;padding:12px;border-radius:12px;border:none;background:var(--bg);outline:none;">
-        <button type="button" class="btn primary" style="padding:12px 16px;">
-          <i class="fas fa-paper-plane"></i>
-        </button>
-      </form>
-    </div>
-  </section>
-
   <!-- PERFIL -->
   <section id="perfil" class="screen">
     <div class="container">
@@ -1028,16 +1054,16 @@ input:checked + .toggle-slider:before{
           </div>
         </div>
         
-        <h3 class="text-center mb-8"><span data-user-name>María González</span></h3>
+        <h3 class="text-center mb-8">María González</h3>
         <p class="text-center mb-16">Dueña de Rocky · Miembro desde 2023</p>
         
         <div class="stats-grid mb-16">
           <div class="stat-card neo">
-            <div class="stat-number" data-walks>24</div>
+            <div class="stat-number">24</div>
             <div class="stat-label">Paseos</div>
           </div>
           <div class="stat-card neo">
-            <div class="stat-number" data-rating>4.8</div>
+            <div class="stat-number">4.8</div>
             <div class="stat-label">Rating</div>
           </div>
         </div>
@@ -1084,59 +1110,9 @@ input:checked + .toggle-slider:before{
         </button>
       </div>
 
-      <button class="btn w-100" style="color:var(--primary);" onclick="handleLogout()">
+      <button class="btn w-100" style="color:var(--primary);" onclick="go('splash')">
         <i class="fas fa-sign-out-alt"></i> Cerrar sesión
       </button>
-    </div>
-  </section>
-
-  <!-- EDITAR PERFIL -->
-  <section id="edit-profile" class="screen">
-    <div class="container">
-      <div class="header">
-        <button class="btn small" onclick="go('perfil')" style="position:absolute;left:20px;top:20px;">
-          <i class="fas fa-arrow-left"></i>
-        </button>
-        <h2>Editar perfil</h2>
-        <p>Actualiza tu información</p>
-      </div>
-
-      <div class="card neo mb-16">
-        <div class="flex-center mb-20">
-          <div class="dog-avatar" style="width:80px;height:80px;font-size:32px;background:linear-gradient(135deg, var(--primary), var(--secondary));">
-            <i class="fas fa-user"></i>
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Nombre completo</label>
-          <input type="text" class="input" placeholder="Nombre">
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Email</label>
-          <input type="email" class="input" placeholder="correo@email.com">
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Teléfono</label>
-          <input type="tel" class="input" placeholder="+34 123 456 789">
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Bio</label>
-          <textarea class="input" placeholder="Cuéntanos sobre ti..." rows="3" style="resize:none;"></textarea>
-        </div>
-
-        <div class="flex gap-12">
-          <button class="btn primary flex-1" onclick="updateProfile()">
-            <i class="fas fa-save"></i> Guardar
-          </button>
-          <button class="btn flex-1" onclick="go('perfil')">
-            <i class="fas fa-times"></i> Cancelar
-          </button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1187,116 +1163,50 @@ input:checked + .toggle-slider:before{
 </div>
 
 <script>
-// ===== STATE MANAGEMENT =====
-const AppState = {
-  user: {
-    name: 'María González',
-    avatar: '👩',
-    type: 'owner',
-    rating: 4.8,
-    walks: 24,
-    member_since: 2023,
-    notifications: true,
-    location: true,
-    dark_mode: false
-  },
-  currentWalk: null,
-  selectedDog: null,
-  notifications: [],
-  chat: []
-};
-
-// ===== LOCAL STORAGE =====
-function saveState() {
-  localStorage.setItem('paseo_state', JSON.stringify(AppState));
-}
-
-function loadState() {
-  const saved = localStorage.getItem('paseo_state');
-  if (saved) {
-    try {
-      Object.assign(AppState, JSON.parse(saved));
-    } catch (e) {
-      console.log('Estado guardado corrupto, usando estado por defecto');
-    }
-  }
-}
-
-// ===== NAVEGACIÓN =====
+// Navegación entre pantallas
 function go(screenId) {
-  // Validar que existe la pantalla
-  const screen = document.getElementById(screenId);
-  if (!screen) {
-    console.error(`Pantalla no encontrada: ${screenId}`);
-    return;
-  }
-
-  // Limpiar pantallas activas
-  document.querySelectorAll('.screen').forEach(s => {
-    s.classList.remove('active');
-  });
-
-  // Activar nueva pantalla
-  screen.classList.add('active');
-  console.log(`Navegando a: ${screenId}`);
-
-  // Actualizar navegación inferior
-  updateNavigation(screenId);
-
-  // Ejecutar función específica de pantalla si existe
-  const screenFn = `init${screenId.replace(/-./g, x => x[1].toUpperCase()).replace(/^./, x => x.toUpperCase())}`;
-  if (typeof window[screenFn] === 'function') {
-    window[screenFn]();
-  }
-}
-
-function updateNavigation(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-
+  document.getElementById(screenId).classList.add('active');
+  
+  // Actualizar nav activo
   const navMap = {
     'home': 0,
     'paseo-detail': 1,
     'chat': 2,
-    'perfil': 3,
-    'splash': -1,
-    'login': -1,
-    'register': -1,
-    'edit-profile': -1,
-    'paseo-active': 1,
-    'paseo-completed': 1
+    'perfil': 3
   };
-
-  const navIndex = navMap[screenId];
-  if (navIndex >= 0) {
-    const navBtns = document.querySelectorAll('.nav-btn');
-    if (navBtns[navIndex]) {
-      navBtns[navIndex].classList.add('active');
-    }
+  
+  if (navMap[screenId] !== undefined) {
+    document.querySelectorAll('.nav-btn')[navMap[screenId]].classList.add('active');
   }
 }
 
-// ===== MODALES =====
+// Modal functions
 function openModal(modalId) {
-  const modal = document.getElementById(modalId);
-  if (modal) {
-    modal.classList.add('active');
-  }
+  document.getElementById(modalId).classList.add('active');
 }
 
 function closeModal(modalId) {
-  const modal = document.getElementById(modalId);
-  if (modal) {
-    modal.classList.remove('active');
-  }
+  document.getElementById(modalId).classList.remove('active');
 }
 
-// ===== CALIFICACIÓN =====
+// Cerrar modal al hacer clic fuera
+document.querySelectorAll('.modal-overlay').forEach(modal => {
+  modal.addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('active');
+    }
+  });
+});
+
+// Sistema de calificación
 let currentRating = 0;
 function rateWalk(stars) {
   currentRating = stars;
   const starElements = document.querySelectorAll('.star');
   starElements.forEach((star, index) => {
-    if (index < stars - 1) {
+    if (index < stars) {
       star.classList.remove('far');
       star.classList.add('fas');
     } else {
@@ -1306,281 +1216,33 @@ function rateWalk(stars) {
   });
 }
 
-// ===== SELECCIÓN DE TIPO DE USUARIO =====
+// Tipo de usuario
 function setUserType(type) {
-  AppState.user.type = type;
-  
   const buttons = document.querySelectorAll('#register .btn');
   buttons.forEach(btn => {
-    btn.classList.remove('primary');
+    btn.style.boxShadow = '';
     btn.style.background = '';
   });
-
-  const index = type === 'owner' ? 0 : 1;
-  const selectedBtn = buttons[index];
-  if (selectedBtn) {
-    selectedBtn.classList.add('primary');
-  }
   
-  saveState();
+  const selectedBtn = document.querySelector(`#register .btn:nth-child(${type === 'owner' ? 1 : 2})`);
+  selectedBtn.style.background = 'var(--primary)';
+  selectedBtn.style.color = 'white';
+  selectedBtn.style.boxShadow = '6px 6px 12px rgba(0,0,0,.15)';
 }
 
-// ===== AUTENTICACIÓN =====
-function handleLogin() {
-  const email = document.querySelector('#login input[type="email"]')?.value;
-  const password = document.querySelector('#login input[type="password"]')?.value;
-  
-  if (email && password) {
-    console.log('Login:', email);
-    go('home');
-    saveState();
-  } else {
-    alert('Por favor completa email y contraseña');
-  }
-}
-
-function handleRegister() {
-  const name = document.querySelector('#register input[placeholder*="Nombre"]')?.value;
-  const email = document.querySelector('#register input[type="email"]')?.value;
-  const password = document.querySelector('#register input[type="password"]')?.value;
-  
-  if (name && email && password && AppState.user.type) {
-    console.log('Registro:', {name, email, type: AppState.user.type});
-    AppState.user.name = name;
-    go('home');
-    saveState();
-  } else {
-    alert('Por favor completa todos los campos y selecciona un tipo de usuario');
-  }
-}
-
-function handleLogout() {
-  if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-    AppState.user.name = 'Nuevo Usuario';
-    go('splash');
-    saveState();
-  }
-}
-
-// ===== FUNCIONES DE PASEOS =====
-function selectDog(dogId) {
-  AppState.selectedDog = dogId;
-  go('paseo-detail');
-  saveState();
-  console.log('Perro seleccionado:', dogId);
-}
-
-function startWalk() {
-  AppState.currentWalk = {
-    id: Date.now(),
-    dog: AppState.selectedDog,
-    started: new Date(),
-    duration: 0,
-    distance: 0
-  };
-  go('paseo-active');
-  startWalkTimer();
-  saveState();
-}
-
-function completeWalk() {
-  if (AppState.currentWalk) {
-    AppState.currentWalk.completed = new Date();
-  }
-  go('paseo-completed');
-  saveState();
-}
-
-// Timer para paseo activo
-function startWalkTimer() {
-  let seconds = 0;
-  const interval = setInterval(() => {
-    seconds++;
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    
-    const timerEl = document.querySelector('[data-timer]');
-    if (timerEl) {
-      timerEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+// Inicialización
+window.addEventListener('DOMContentLoaded', () => {
+  // Simular notificaciones
+  setInterval(() => {
+    const badge = document.querySelector('.notification-badge');
+    if (badge) {
+      const count = parseInt(badge.textContent);
+      badge.textContent = count > 0 ? count : '3';
     }
-    
-    // Simular distancia
-    if (AppState.currentWalk) {
-      AppState.currentWalk.distance = (seconds * 0.004).toFixed(1);
-      const distEl = document.querySelector('[data-distance]');
-      if (distEl) {
-        distEl.textContent = `${AppState.currentWalk.distance} km`;
-      }
-    }
-
-    // Detener si salimos de la pantalla
-    if (!document.getElementById('paseo-active')?.classList.contains('active')) {
-      clearInterval(interval);
-    }
-  }, 1000);
-}
-
-// ===== CHAT =====
-function sendMessage(e) {
-  if (e && e.preventDefault) e.preventDefault();
+  }, 10000);
   
-  const input = document.querySelector('.chat-input input');
-  const message = input?.value.trim();
-  
-  if (message) {
-    AppState.chat.push({
-      type: 'sent',
-      text: message,
-      time: new Date()
-    });
-    
-    if (input) input.value = '';
-    updateChatDisplay();
-    saveState();
-    
-    // Simular respuesta
-    setTimeout(() => {
-      AppState.chat.push({
-        type: 'received',
-        text: '¡Recibido! Gracias por tu mensaje.',
-        time: new Date()
-      });
-      updateChatDisplay();
-    }, 500);
-  }
-}
-
-function updateChatDisplay() {
-  const container = document.querySelector('.chat-container');
-  if (container && AppState.chat.length > 0) {
-    container.innerHTML = AppState.chat.map(msg => `
-      <div class="message ${msg.type}">
-        ${escapeHtml(msg.text)}
-      </div>
-    `).join('');
-    container.scrollTop = container.scrollHeight;
-  }
-}
-
-// ===== PERFIL =====
-function updateProfile() {
-  const nameInput = document.querySelector('#edit-profile input[placeholder*="Nombre"]');
-  if (nameInput?.value) {
-    AppState.user.name = nameInput.value;
-    saveState();
-    alert('Perfil actualizado correctamente');
-    go('perfil');
-  }
-}
-
-// ===== INICIALIZADORES DE PANTALLA =====
-function initHome() {
-  const userNameEl = document.querySelector('[data-user-name]');
-  if (userNameEl) userNameEl.textContent = AppState.user.name;
-  
-  const badge = document.querySelector('.notification-badge');
-  if (badge) {
-    badge.textContent = AppState.notifications.length || '3';
-  }
-}
-
-function initPerfil() {
-  const userNameEl = document.querySelector('[data-user-name]');
-  if (userNameEl) userNameEl.textContent = AppState.user.name;
-  
-  const walksEl = document.querySelector('[data-walks]');
-  if (walksEl) walksEl.textContent = AppState.user.walks;
-  
-  const ratingEl = document.querySelector('[data-rating]');
-  if (ratingEl) ratingEl.textContent = AppState.user.rating;
-}
-
-function initChat() {
-  updateChatDisplay();
-}
-
-// ===== UTILIDADES =====
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-// ===== EVENT LISTENERS =====
-function setupEventListeners() {
-  // Cerrar modal al hacer clic fuera
-  document.querySelectorAll('.modal-overlay').forEach(modal => {
-    modal.addEventListener('click', function(e) {
-      if (e.target === this) {
-        this.classList.remove('active');
-      }
-    });
-  });
-
-  // Cerrar modal con ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay').forEach(modal => {
-        modal.classList.remove('active');
-      });
-    }
-  });
-
-  // Login
-  const loginBtn = document.querySelector('#login .btn.primary');
-  if (loginBtn) {
-    loginBtn.addEventListener('click', handleLogin);
-  }
-
-  // Register
-  const registerBtn = document.querySelector('#register .btn.primary');
-  if (registerBtn) {
-    registerBtn.addEventListener('click', handleRegister);
-  }
-
-  // Chat
-  const chatForm = document.querySelector('.chat-input');
-  if (chatForm) {
-    const btn = chatForm.querySelector('button');
-    if (btn) {
-      btn.addEventListener('click', sendMessage);
-    }
-    const input = chatForm.querySelector('input');
-    if (input) {
-      input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          sendMessage();
-        }
-      });
-    }
-  }
-
-  // Tecla Enter en inputs
-  document.querySelectorAll('input[type="password"], input[type="email"]').forEach(input => {
-    input.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        if (e.target.closest('#login')) {
-          handleLogin();
-        } else if (e.target.closest('#register')) {
-          handleRegister();
-        }
-      }
-    });
-  });
-}
-
-// ===== INICIALIZACIÓN =====
-document.addEventListener('DOMContentLoaded', () => {
-  // Cargar estado guardado
-  loadState();
-  
-  // Setup de eventos
-  setupEventListeners();
-  
-  // Inicializar pantalla splash
-  go('splash');
-  
-  console.log('PASEO app iniciada - Sistema listo');
+  // Estrellas iniciales
+  rateWalk(4);
 });
 </script>
 
